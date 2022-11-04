@@ -1,0 +1,23 @@
+swagger: "2.0"
+
+info:
+  title: "/"
+  version: "1.0"
+
+basePath: /v1.0
+
+paths:
+  /:
+    post:
+      summary: Generate message
+      description: Generates a greeting message.
+      operationId: new_flask_app.home
+      produces:
+        - text/plain;
+      responses:
+        200:
+          description: greeting response
+          schema:
+            type: string
+          examples:
+            "text/plain": "Hello world"
