@@ -21,3 +21,17 @@ paths:
             type: string
           examples:
             "text/plain": "Hello world"
+  /books:
+    post:
+      summary: generates list of books
+      description: Generates a 200 code and books from json file
+      operationId: new_flask_app.books
+      produces:
+        - application/json;
+      responses:
+        200:
+          description: https code response and json file
+          schema:
+            type: object
+          examples:
+            "books": [{ "title": "xxx","author": "yyy","timestamp": "YYYY-MM-DD HH:MM:SS" }]
