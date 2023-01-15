@@ -3,6 +3,11 @@ import json
 from flask import Flask, jsonify
 import os
 from datetime import datetime
+import pytz
+
+# create timezone object for Poland
+poland_tz = pytz.timezone("Europe/Warsaw")
+
 
 app = connexion.App(__name__)
 
@@ -15,22 +20,22 @@ def books():
         {
             "title": "Lord of the rings",
             "author": "J.R.R. Tolkien",
-            "timestamp": datetime.now()
+            "timestamp": datetime.now(poland_tz)
         },
         {
             "title": "Harry Potter and the goblet of fire",
             "author": "J.K. Rowling",
-            "timestamp": datetime.now()
+            "timestamp": datetime.now(poland_tz)
         },
         {
             "title": "I Heard You Paint Houses",
             "author": "Charles Brandt",
-            "timestamp": datetime.now()
+            "timestamp": datetime.now(poland_tz)
         },
         {
             "title": "Before caffe gets cold",
             "author": "Toshikazu Kawaguchi",
-            "timestamp": datetime.now()
+            "timestamp": datetime.now(poland_tz)
         }
     ]
     return jsonify(books_list), 200
