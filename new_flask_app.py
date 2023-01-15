@@ -5,11 +5,10 @@ import os
 
 app = connexion.App(__name__)
 
-@app.route("/")
+
 def home():
     return "hello there"
 
-@app.route('/books')
 def books():
     books_list = [
         {
