@@ -45,7 +45,7 @@ def books_post(book):
     author = book["author"]
     book["timestamp"] = datetime.now(poland_tz)
     books_list.append(book)
-    return jsonify(books_list)
+    return jsonify(books_list), 200
 
 if __name__ == "__main__":
     app.add_api('my_api.yaml')
