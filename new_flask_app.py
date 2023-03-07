@@ -11,39 +11,41 @@ poland_tz = pytz.timezone("Europe/Warsaw")
 
 app = connexion.App(__name__)
 
+books_list = [
+    {
+        "title": "Lord of the rings",
+        "author": "J.R.R. Tolkien",
+        "timestamp": datetime.now(poland_tz)
+    },
+    {
+        "title": "Harry Potter and the goblet of fire",
+        "author": "J.K. Rowling",
+        "timestamp": datetime.now(poland_tz)
+    },
+    {
+        "title": "I Heard You Paint Houses",
+        "author": "Charles Brandt",
+        "timestamp": datetime.now(poland_tz)
+    },
+    {
+        "title": "Before caffe gets cold",
+        "author": "Toshikazu Kawaguchi",
+        "timestamp": datetime.now(poland_tz)
+    }
+]
 
 def home():
     return "hello there"
 
 def books_get():
-    books_list = [
-        {
-            "title": "Lord of the rings",
-            "author": "J.R.R. Tolkien",
-            "timestamp": datetime.now(poland_tz)
-        },
-        {
-            "title": "Harry Potter and the goblet of fire",
-            "author": "J.K. Rowling",
-            "timestamp": datetime.now(poland_tz)
-        },
-        {
-            "title": "I Heard You Paint Houses",
-            "author": "Charles Brandt",
-            "timestamp": datetime.now(poland_tz)
-        },
-        {
-            "title": "Before caffe gets cold",
-            "author": "Toshikazu Kawaguchi",
-            "timestamp": datetime.now(poland_tz)
-        }
-    ]
     return jsonify(books_list), 200
 
 def books_post(book):
     title = book["title"]
     author = book["author"]
-    return book
+    book["timestamp"] = datetime.now(poland_tz)
+    books_list.append(book)
+    return books_list
 
 if __name__ == "__main__":
     app.add_api('my_api.yaml')
