@@ -1,37 +1,69 @@
-swagger: "2.0"
+openapi: 3.0.0
 
 info:
   title: "/"
   version: "1.0"
 
-basePath: /v1.0
+
+servers:
+  - url: "/v1.0"
+
+components:
+  schemas:
+    Book:
+      type: object
+      required:
+        - author
+        - title
+      properties:
+        author:
+          type: string
+        title:
+          type: string
 
 paths:
-  /:
+  /home:
     get:
       summary: Generate message
       description: Generates a greeting message.
       operationId: new_flask_app.home
-      produces:
-        - text/plain;
+      #      produces:
+      #        - text/plain
       responses:
         200:
           description: greeting response
-          schema:
-            type: string
-          examples:
-            "text/plain": "Hello world"
+          #          schema:
+          #            type: string
+          #          examples:
+          #            "Hello world"
   /books:
     get:
       summary: generates list of books
       description: Generates a 200 code and books from json file
-      operationId: new_flask_app.books
-      produces:
-        - application/json;
+      operationId: new_flask_app.books_get
+      #      produces:
+      #        - application/json;
       responses:
         200:
           description: https code response and json file
-          schema:
-            type: object
-          examples:
-            "books": [{ "title": "xxx","author": "yyy","timestamp": "YYYY-MM-DD HH:MM:SS" }]
+          #          schema:
+          #            type: object
+          #          examples:
+          #            "books": [{ "title": "xxx","author": "yyy","timestamp": "YYYY-MM-DD HH:MM:SS" }]
+    post:
+      summary: enables to add books
+      description: adds books by its title and author
+      operationId: new_flask_app.books_post
+      #      produces:
+      #        - application/json
+      requestBody:
+        description: "Book to add"
+        required: True
+        content:
+          application/json:
+            schema:
+              x-body-name: "book"
+              $ref: "#/components/schemas/Book"
+      responses:
+        200:
+          description: https code response and json file

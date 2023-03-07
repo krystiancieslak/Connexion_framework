@@ -15,7 +15,7 @@ app = connexion.App(__name__)
 def home():
     return "hello there"
 
-def books():
+def books_get():
     books_list = [
         {
             "title": "Lord of the rings",
@@ -39,6 +39,11 @@ def books():
         }
     ]
     return jsonify(books_list), 200
+
+def books_post(book):
+    title = book["title"]
+    author = book["author"]
+    return book
 
 if __name__ == "__main__":
     app.add_api('my_api.yaml')
