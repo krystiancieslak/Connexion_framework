@@ -67,3 +67,13 @@ paths:
       responses:
         200:
           description: https code response and json file
+  /authors:
+    get:
+      summary: generates list of authors
+      description: Generates a 200 code and list of authors as json file
+      operationId: new_flask_app.authors
+      #      produces:
+      #        - application/json;
+      responses:
+        200:
+          description: https code response and json file

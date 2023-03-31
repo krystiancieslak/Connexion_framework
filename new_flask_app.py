@@ -47,6 +47,12 @@ def books_post(book):
     books_list.append(book)
     return jsonify(books_list), 200
 
+def authors():
+    list_of_authors=[]
+    for book in books_list:
+        list_of_authors.append(book["author"])
+    return jsonify(list_of_authors), 200
+
 if __name__ == "__main__":
     app.add_api('my_api.yaml')
     port = int(os.environ.get('PORT', 5001))
