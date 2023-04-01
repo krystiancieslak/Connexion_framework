@@ -114,6 +114,20 @@ paths:
                 $ref: '#/components/schemas/Book'
         '404':
           description: Book not found
+    delete:
+      operationId: new_flask_app.books_id_delete
+      parameters:
+        - name: id
+          in: path
+          description: ID of the book to be deleted
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Book deleted successfully
+        '404':
+          description: Book not found
   /authors:
     get:
       summary: generates list of authors

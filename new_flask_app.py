@@ -67,6 +67,14 @@ def books_id_put(id, data):
     books_list[id]['author'] = data['author']
     return jsonify(books_list[id]), 200
 
+def books_id_delete(id):
+    if id >= len(books_list):
+        return {'error': 'Book not found'}, 404
+    if id < 0:
+        return {'error': 'Book not found'}, 404
+    del books_list[id]
+    return 200
+
 def authors():
     list_of_authors=[]
     for book in books_list:
