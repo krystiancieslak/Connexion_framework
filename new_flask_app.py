@@ -47,6 +47,26 @@ def books_post(book):
     books_list.append(book)
     return jsonify(books_list), 200
 
+def books_id_get(id):
+    if id >= len(books_list):
+        return {'error': 'Book not found'}, 404
+    if id < 0:
+        return {'error': 'Book not found'}, 404
+    book = books_list[id]
+    return jsonify(book), 200
+
+def books_id_put(id, data):
+    if id >= len(books_list):
+        return {'error': 'Book not found'}, 404
+    if id < 0:
+        return {'error': 'Book not found'}, 404
+    title = data["title"]
+    author = data["author"]
+    data["timestamp"] = datetime.now(poland_tz)
+    books_list[id]['title'] = data['title']
+    books_list[id]['author'] = data['author']
+    return jsonify(books_list[id]), 200
+
 def authors():
     list_of_authors=[]
     for book in books_list:

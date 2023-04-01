@@ -67,6 +67,53 @@ paths:
       responses:
         200:
           description: https code response and json file
+  /books/{id}:
+    get:
+      summary: Get book by ID
+      operationId: new_flask_app.books_id_get
+      parameters:
+        - name: id
+          in: path
+          description: ID of the book
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: Book not found
+    put:
+      operationId: new_flask_app.books_id_put
+      requestBody:
+        description: "Book to modify"
+        required: True
+        content:
+          application/json:
+            schema:
+              x-body-name: "data"
+              $ref: "#/components/schemas/Book"
+      parameters:
+        - name: id
+          in: path
+          description: ID of the book
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                x-body-name: "data"
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: Book not found
   /authors:
     get:
       summary: generates list of authors
