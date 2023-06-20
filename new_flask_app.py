@@ -5,9 +5,7 @@ import os
 from datetime import datetime
 import pytz
 from config import db
-
-# create timezone object for Poland
-poland_tz = pytz.timezone("Europe/Warsaw")
+from config import poland_tz
 
 books_list = [
     {
