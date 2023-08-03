@@ -1,23 +1,26 @@
-{
-"title": "Lord of the rings",
-"author": "J.R.R. Tolkien",
-"timestamp": "1954-07-29 00:00:00"
-}
-
-{
-"title": "Harry Potter and the goblet of fire",
-"author": "J.K. Rowling",
-"timestamp": "2000-07-08 00:00:00"
+[
+    {
+        "name": "J.R.R.",
+        "surname": "Tolkien",
+        "title": "Lord of the rings",
+        "timestamp": "1954-07-29 00:00:00"
+    },
+    {
+        "name": "J.K.",
+        "surname": "Rowling",
+        "title": "Harry Potter and the goblet of fire",
+        "timestamp": "2000-07-08 00:00:00"
+    },
+    {
+        "name": "Charles",
+        "surname": "Brandt",
+        "title": "I Heard You Paint Houses",
+        "timestamp": "2004-01-01 00:00:00"
+    },
+    {
+        "name": "Toshikazu",
+        "surname": "Kawaguchi",
+        "title": "Before caffe gets cold",
+        "timestamp": "2015-12-01 00:00:00"
     }
-
-{
-"title": "I Heard You Paint Houses",
-"author": "Charles Brandt",
-"timestamp": "2004-01-01 00:00:00"
-    }
-
-{
-"title": "Before caffe gets cold",
-"author": "Toshikazu Kawaguchi",
-"timestamp": "2015-12-01 00:00:00"
-    }
+]

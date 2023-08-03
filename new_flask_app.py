@@ -1,11 +1,25 @@
-import connexion
+from models import Book, BookSchema
 import json
-from flask import Flask, jsonify
+from flask import jsonify
 import os
 from datetime import datetime
 import pytz
-from config import db
-from config import poland_tz
+from config import db, poland_tz, app, connex_app
+
+with app.app_context():
+    db.create_all()
+
+with app.app_context():
+    if not Book.query.first():
+        with open('books.json', 'r') as file:
+            books_data = json.load(file)
+
+        for book_data in books_data:
+            timestamp_str = book_data['timestamp']
+            timestamp = datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S")
+            book = Book(name=book_data['name'], surname=book_data['surname'], title=book_data['title'], timestamp=timestamp)
+            db.session.add(book)
+        db.session.commit()
 
 books_list = [
     {
@@ -30,13 +44,14 @@ books_list = [
     }
 ]
 
-app = connexion.App(__name__)
 
 def home():
     return "hello there"
 
 def books_get():
-    return jsonify(books_list), 200
+    books = Book.query.all()
+    books_schema = BookSchema(many=True)
+    return jsonify(books_schema.dump(books))
 
 def books_post(book):
     title = book["title"]
@@ -80,6 +95,6 @@ def authors():
     return jsonify(list_of_authors), 200
 
 if __name__ == "__main__":
-    app.add_api('my_api.yaml')
+    connex_app.add_api('my_api.yaml')  # Use connex_app to add API
     port = int(os.environ.get('PORT', 5001))
-    app.run(port=port, host='0.0.0.0')
+    connex_app.run(port=port, host='0.0.0.0')  # Use connex_app to run the application
