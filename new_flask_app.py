@@ -89,10 +89,16 @@ def books_id_delete(id):
     return 200
 
 def authors():
-    list_of_authors=[]
-    for book in books_list:
-        list_of_authors.append(book["author"])
-    return jsonify(list_of_authors), 200
+    books = Book.query.all()
+
+    authors_list = set()
+    for book in books:
+        author_name = f"{book.name} {book.surname}"
+        authors_list.add(author_name)
+
+    sorted_authors = sorted(list(authors_list))
+    
+    return jsonify(sorted_authors)
 
 if __name__ == "__main__":
     connex_app.add_api('my_api.yaml')  # Use connex_app to add API
