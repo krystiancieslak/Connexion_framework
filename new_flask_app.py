@@ -53,12 +53,23 @@ def books_get():
     books_schema = BookSchema(many=True)
     return jsonify(books_schema.dump(books))
 
-def books_post(book):
-    title = book["title"]
-    author = book["author"]
-    book["timestamp"] = datetime.now(poland_tz)
-    books_list.append(book)
-    return jsonify(books_list), 200
+def books_post(body):
+    title = body.get("title")
+    name = body.get("name")
+    surname = body.get("surname")
+
+    if not title or not name or not surname:
+        return jsonify({"message": "Invalid input"}), 400
+
+    last_book = Book.query.order_by(Book.id.desc()).first()
+    next_id = last_book.id + 1 if last_book else 1
+
+    new_book = Book(id=next_id, title=title, name=name, surname=surname, timestamp=datetime.now(poland_tz))
+
+    db.session.add(new_book)
+    db.session.commit()
+
+    return jsonify({"id": new_book.id}), 201
 
 def books_id_get(id):
     book = Book.query.get(id)

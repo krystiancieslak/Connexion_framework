@@ -13,7 +13,8 @@ components:
     Book:
       type: object
       required:
-        - author
+        - name
+        - surname
         - title
       properties:
         author:
@@ -49,10 +50,10 @@ paths:
           #          schema:
           #            type: object
           #          examples:
-          #            "books": [{ "title": "xxx","author": "yyy","timestamp": "YYYY-MM-DD HH:MM:SS" }]
+          #            "books": [{ "title": "xxx","name": "yyy","surname": "zzz""timestamp": "YYYY-MM-DD HH:MM:SS" }]
     post:
       summary: enables to add books
-      description: adds books by its title and author
+      description: adds books by its title, name of author and surname of author
       operationId: new_flask_app.books_post
       #      produces:
       #        - application/json
@@ -62,7 +63,7 @@ paths:
         content:
           application/json:
             schema:
-              x-body-name: "book"
+              x-body-name: "body"
               $ref: "#/components/schemas/Book"
       responses:
         200:
