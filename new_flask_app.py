@@ -61,12 +61,13 @@ def books_post(book):
     return jsonify(books_list), 200
 
 def books_id_get(id):
-    if id >= len(books_list):
-        return {'error': 'Book not found'}, 404
-    if id < 0:
-        return {'error': 'Book not found'}, 404
-    book = books_list[id]
-    return jsonify(book), 200
+    book = Book.query.get(id)
+    
+    if book:
+        book_schema = BookSchema()
+        return jsonify(book_schema.dump(book))
+    else:
+        return jsonify({"message": "Book not found"}), 404
 
 def books_id_put(id, data):
     if id >= len(books_list):
