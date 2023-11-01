@@ -23,14 +23,16 @@ jobs:
         username: _json_key
         password: ${{ secrets.GCP_SA_KEY }}
 
+    - name: Lowercase repo name
+      id: repo_lower
+      run: echo "REPO_LOWER=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
     - name: Build and push Docker image
-      id: docker_build
       uses: docker/build-push-action@v2
       with:
         context: .
         push: ${{ github.ref == 'refs/heads/master' }}
-        tags: gcr.io/${{ secrets.GCP_PROJECT_NAME }}/${{ github.repository_owner }}/${{ github.event.repository.name }}:${{ github.sha }}
-        load: true # Add this if you want to load the image into Docker after building
+        tags: gcr.io/${{ secrets.GCP_PROJECT_NAME }}/${{ env.REPO_LOWER }}:${{ github.sha }}
         
     - name: Output container image URL
       run: echo ${{ steps.docker_build.outputs.digest }}
