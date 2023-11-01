@@ -19,8 +19,8 @@ jobs:
     - name: Login to Google Container Registry
       uses: docker/login-action@v1
       with:
-        registru: gcr.io
-        usermane: _json_key
+        registry: gcr.io
+        username: _json_key
         password: ${{ secrets.GCP_SA_KEY }}
 
     - name: Build and push Docker image
