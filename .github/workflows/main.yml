@@ -29,8 +29,9 @@ jobs:
       with:
         context: .
         push: ${{ github.ref == 'refs/heads/master' }}
-        tags: gcr.io/${{ secrets.GCP_PROJECT_NAME }}/${{ github.repository }}:${{ github.sha }}
-
+        tags: gcr.io/${{ secrets.GCP_PROJECT_NAME }}/${{ github.repository_owner }}/${{ github.event.repository.name }}:${{ github.sha }}
+        load: true # Add this if you want to load the image into Docker after building
+        
     - name: Output container image URL
       run: echo ${{ steps.docker_build.outputs.digest }}
         
